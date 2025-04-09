@@ -28,6 +28,23 @@ document.addEventListener('mouseleave', () => {
 
 // === ПИКСЕЛЬНЫЙ МИКСЕР + ЗУМ + КУБИК ===
 document.addEventListener("DOMContentLoaded", function () {
+
+      function updateShuffleBtnPosition() {
+    const btnWrapper = document.querySelector('.shuffle-btn-wrapper');
+    if (!btnWrapper || !window.visualViewport) return;
+
+    const viewportHeight = window.visualViewport.height;
+    const layoutHeight = window.innerHeight;
+    const offset = layoutHeight - viewportHeight;
+
+    btnWrapper.style.transform = `translateY(-${offset}px)`;
+  }
+
+  window.visualViewport?.addEventListener('resize', updateShuffleBtnPosition);
+  window.visualViewport?.addEventListener('scroll', updateShuffleBtnPosition);
+  window.addEventListener('orientationchange', updateShuffleBtnPosition);
+  updateShuffleBtnPosition();
+    
 const imageUrls = [
   "img/8marta2025.gif",
   "img/Academy1.png",
@@ -636,37 +653,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
-document.addEventListener("DOMContentLoaded", () => {
-function setVhUnit() {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-}
-window.addEventListener('resize', setVhUnit);
-window.addEventListener('orientationchange', setVhUnit);
-setVhUnit();
-
-
-
-const shuffleBtnWrapper = document.querySelector('.shuffle-btn-wrapper');
-
-// изначальная корректная позиция
-function updateBtnPosition() {
-  const viewportHeight = window.visualViewport.height;
-  const windowHeight = window.innerHeight;
-
-  const keyboardOrBarShown = viewportHeight < windowHeight - 100;
-
-  if (keyboardOrBarShown) {
-    // Панель или клавиатура открыта — приподнять кнопку
-    shuffleBtnWrapper.style.transform = 'translateY(-20px)';
-  } else {
-    // Всё ок — вернуть вниз
-    shuffleBtnWrapper.style.transform = 'translateY(0)';
-  }
-}
-
-// при ресайзе визуального вьюпорта
-window.visualViewport.addEventListener('resize', updateBtnPosition);
-window.visualViewport.addEventListener('scroll', updateBtnPosition);
-});
