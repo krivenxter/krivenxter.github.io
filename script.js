@@ -450,11 +450,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-
-src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
- 
 document.addEventListener("DOMContentLoaded", () => {
   const targets = document.querySelectorAll(".top-text-text1");
 
@@ -470,8 +465,10 @@ document.addEventListener("DOMContentLoaded", () => {
       span.style.filter = "blur(4px)";
       el.appendChild(span);
     });
-    
-    
+
+    // 💥 ВАЖНО: убрать .preload-hidden перед анимацией
+    el.classList.remove("preload-hidden");
+
     gsap.fromTo(
       el.querySelectorAll("span"),
       {
@@ -491,6 +488,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   });
 });
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
