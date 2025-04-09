@@ -985,13 +985,21 @@ z-index: 9999999999 !important;
         inset-block-end: -40px;
     }
   
-  .shuffle-btn-wrapper {
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 20px;
-    oveflow: auto;
-    z-index: 9999;
+.shuffle-btn-wrapper {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  z-index: 99999;
+
+  transform: translateY(0);
+  transition: transform 0.3s ease-out, padding-bottom 0.3s ease-out;
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
 }
+
+
   
 
     .top-text {
