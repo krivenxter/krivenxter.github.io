@@ -1,40 +1,5 @@
 
 
-
-document.addEventListener("DOMContentLoaded", () => {
-  const btnWrapper = document.querySelector('.shuffle-btn-wrapper');
-  if (!btnWrapper || !window.visualViewport) return;
-
-  function updatePosition() {
-    const offset = window.innerHeight - window.visualViewport.height;
-    btnWrapper.style.transform = `translateY(-${offset}px)`;
-  }
-
-  let ticking = false;
-  function requestTick() {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        updatePosition();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
-
-  ['resize', 'scroll'].forEach(event => {
-    window.visualViewport.addEventListener(event, requestTick);
-  });
-
-  ['orientationchange', 'touchstart', 'touchend'].forEach(event => {
-    window.addEventListener(event, () => {
-      setTimeout(updatePosition, 50); // немного позже, чтобы всё точно схватить
-    });
-  });
-
-  updatePosition();
-});
-
-
 // === ПАРАЛЛАКС ГЛАЗ ===
 document.addEventListener('mousemove', function(event) {
     let parallaxElements = document.querySelectorAll('.parallax-element');
