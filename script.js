@@ -634,3 +634,24 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+
+
+
+function updateShuffleBtnPosition() {
+  const btn = document.querySelector(".shuffle-btn-wrapper");
+  if (!btn || !window.visualViewport) return;
+
+  const offset = window.innerHeight - window.visualViewport.height;
+  btn.style.transform = `translateY(-${offset}px)`;
+}
+
+// навешиваем обновление позиции при любом изменении viewport'а
+if (window.visualViewport) {
+  window.visualViewport.addEventListener("resize", updateShuffleBtnPosition);
+  window.visualViewport.addEventListener("scroll", updateShuffleBtnPosition);
+  window.addEventListener("orientationchange", updateShuffleBtnPosition);
+}
+
+// вызываем при загрузке
+document.addEventListener("DOMContentLoaded", updateShuffleBtnPosition);

@@ -326,6 +326,8 @@ button#shuffle-btn {
     align-items: center;
     cursor: pointer;
     pointer-events: all;
+margin: 0 auto;
+border: none;
   gap: 10px;
 }
 
@@ -767,10 +769,6 @@ button#shuffle-btn:hover  {
 
 @media (max-width: 960px) {
 
-  .sidebar-wrapper {
-  height: calc(var(--vh, 1vh) * 100);
-}
-
   
   
 .mobile-image-container {
@@ -909,6 +907,7 @@ margin-bottom: 50px;
     width: 100%;
     pointer-events: none;
 }
+
   .sidebar-mixer h3.title {
     display: none;
   }
@@ -995,12 +994,16 @@ z-index: 9999999999 !important;
         inset-block-end: -40px;
     }
   
-  .shuffle-btn-wrapper {
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 20px;
-    oveflow: auto;
-    z-index: 9999;
+.shuffle-btn-wrapper {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  z-index: 9999;
+  transition: transform 0.3s ease;
+  pointer-events: all;
 }
   
 
