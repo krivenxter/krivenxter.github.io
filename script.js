@@ -1,24 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-  function updateShuffleBtnPosition() {
+function hardForceUpdateBtnPosition() {
   const btnWrapper = document.querySelector('.shuffle-btn-wrapper');
   if (!btnWrapper || !window.visualViewport) return;
 
-  const offset = window.innerHeight - window.visualViewport.height;
+  const viewportHeight = window.visualViewport.height;
+  const windowHeight = window.innerHeight;
+  const offset = windowHeight - viewportHeight;
+
+  // Принудительно задаем transform
   btnWrapper.style.transform = `translateY(-${offset}px)`;
 }
 
-if (window.visualViewport) {
-  // Реакция на изменение высоты
-  window.visualViewport.addEventListener('resize', updateShuffleBtnPosition);
-  window.visualViewport.addEventListener('scroll', updateShuffleBtnPosition);
-  window.addEventListener('orientationchange', updateShuffleBtnPosition);
+// Первый запуск
+hardForceUpdateBtnPosition();
 
-  // 🧨 Хардкорный интервал – обновляем раз в 500мс
-  setInterval(updateShuffleBtnPosition, 500);
-  
-  // первый запуск
-  updateShuffleBtnPosition();
-}
+// Подписки
+window.visualViewport?.addEventListener('resize', hardForceUpdateBtnPosition);
+window.visualViewport?.addEventListener('scroll', hardForceUpdateBtnPosition);
+window.addEventListener('orientationchange', hardForceUpdateBtnPosition);
+
+// ⛏️ Хардкорный полинг (раз в 300мс)
+setInterval(hardForceUpdateBtnPosition, 300);
   
 });
 
