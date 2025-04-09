@@ -984,6 +984,7 @@ z-index: 9999999999 !important;
         bottom: 0;
         inset-block-end: -40px;
     }
+
   
 .shuffle-btn-wrapper {
   position: fixed;
@@ -995,7 +996,7 @@ z-index: 9999999999 !important;
   z-index: 99999;
 
   transform: translateY(0);
-  transition: transform 0.3s ease-out, padding-bottom 0.3s ease-out;
+  transition: transform 0.3s ease-out;
   padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
 }
 
