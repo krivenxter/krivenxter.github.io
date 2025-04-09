@@ -24,14 +24,18 @@ html, body {
   margin: 0;
     padding: 0;
     box-sizing: border-box;
-  
-  
+
 }
 
 :root {
-  --vh: 100vh;
+  --safe-area-inset-bottom: env(safe-area-inset-bottom);
 }
 
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .footer-menu {
+    padding-bottom: calc(var(--safe-area-inset-bottom) + 1rem);
+  }
+}
 
 
 .preload-hidden {
@@ -326,6 +330,13 @@ button#shuffle-btn {
     cursor: pointer;
     pointer-events: all;
   gap: 10px;
+  position: fixed;
+    max-width: calc(100vw - 40px);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
+  box-sizing: border-box;
 }
 
 button#shuffle-btn:hover  {
