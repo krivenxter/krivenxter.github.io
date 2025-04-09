@@ -1,4 +1,26 @@
+document.addEventListener("DOMContentLoaded", function () {
+  function updateShuffleBtnPosition() {
+  const btnWrapper = document.querySelector('.shuffle-btn-wrapper');
+  if (!btnWrapper || !window.visualViewport) return;
 
+  const offset = window.innerHeight - window.visualViewport.height;
+  btnWrapper.style.transform = `translateY(-${offset}px)`;
+}
+
+if (window.visualViewport) {
+  // Реакция на изменение высоты
+  window.visualViewport.addEventListener('resize', updateShuffleBtnPosition);
+  window.visualViewport.addEventListener('scroll', updateShuffleBtnPosition);
+  window.addEventListener('orientationchange', updateShuffleBtnPosition);
+
+  // 🧨 Хардкорный интервал – обновляем раз в 500мс
+  setInterval(updateShuffleBtnPosition, 500);
+  
+  // первый запуск
+  updateShuffleBtnPosition();
+}
+  
+});
 
 // === ПАРАЛЛАКС ГЛАЗ ===
 document.addEventListener('mousemove', function(event) {
