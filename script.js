@@ -1,14 +1,4 @@
 
-function setVhUnit() {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-}
-window.addEventListener('resize', setVhUnit);
-window.addEventListener('orientationchange', setVhUnit);
-setVhUnit();
-
-
-
 
 
 
@@ -647,6 +637,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+document.addEventListener("DOMContentLoaded", () => {
+function setVhUnit() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+window.addEventListener('resize', setVhUnit);
+window.addEventListener('orientationchange', setVhUnit);
+setVhUnit();
+
+
+
 const shuffleBtnWrapper = document.querySelector('.shuffle-btn-wrapper');
 
 // изначальная корректная позиция
@@ -668,4 +669,4 @@ function updateBtnPosition() {
 // при ресайзе визуального вьюпорта
 window.visualViewport.addEventListener('resize', updateBtnPosition);
 window.visualViewport.addEventListener('scroll', updateBtnPosition);
-
+});
