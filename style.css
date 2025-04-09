@@ -989,16 +989,20 @@ z-index: 9999999999 !important;
   
 .shuffle-btn-wrapper {
   position: fixed;
-  left: 0;
   bottom: 0;
+  left: 0;
   width: 100%;
-  padding: 12px;
   box-sizing: border-box;
   z-index: 99999;
-  transform: translateY(0); /* будет меняться через JS */
-  transition: transform 0.3s ease-out;
+
+  padding: 12px;
   padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+
+  background: white; /* или нужный фон, чтобы не сливаться */
+  transform: translateY(0); /* на всякий случай */
+  transition: transform 0.3s ease; /* если вдруг будешь анимировать */
 }
+
 
   
 
