@@ -888,7 +888,7 @@ box-shadow: #ffffff91 0px 0 120px 10px;
 margin-bottom: 50px;
   }
   
-  .sidebar-wrapper {
+ .sidebar-wrapper {
     top: 0;
     position: fixed !important;
     height: 100vh;
@@ -899,6 +899,7 @@ margin-bottom: 50px;
     width: 100%;
     pointer-events: none;
 }
+  
   .sidebar-mixer h3.title {
     display: none;
   }
@@ -994,7 +995,6 @@ z-index: 9999999999 !important;
   padding: 12px;
   box-sizing: border-box;
   z-index: 99999;
-
   transform: translateY(0);
   transition: transform 0.3s ease-out;
   padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
