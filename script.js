@@ -7,6 +7,22 @@ window.addEventListener('resize', setVhUnit);
 window.addEventListener('orientationchange', setVhUnit);
 setVhUnit();
 
+let lastWindowHeight = window.innerHeight;
+const shuffleBtnWrapper = document.querySelector('.shuffle-btn-wrapper');
+
+window.addEventListener('resize', () => {
+  const currentHeight = window.innerHeight;
+
+  if (currentHeight < lastWindowHeight) {
+    // Панель управления браузера появилась — приподнимем кнопку
+    shuffleBtnWrapper.style.transform = 'translateY(-20px)';
+  } else {
+    // Панель скрылась — вернём вниз
+    shuffleBtnWrapper.style.transform = 'translateY(0)';
+  }
+
+  lastWindowHeight = currentHeight;
+});
 
 // === ПАРАЛЛАКС ГЛАЗ ===
 document.addEventListener('mousemove', function(event) {
