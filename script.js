@@ -1,4 +1,12 @@
 
+function setVhUnit() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+window.addEventListener('resize', setVhUnit);
+window.addEventListener('orientationchange', setVhUnit);
+setVhUnit();
+
 
 // === ПАРАЛЛАКС ГЛАЗ ===
 document.addEventListener('mousemove', function(event) {
