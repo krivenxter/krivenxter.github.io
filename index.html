@@ -1,0 +1,180 @@
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+
+<!-- SVG с нужным path и масштабируемым viewBox -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <clipPath id="magic-star" clipPathUnits="objectBoundingBox">
+        <path d="M1 0 L0.9027 0.1637 C0.7796 0.371 0.7796 0.629 0.9027 0.8363 L1 1 L0.8363 0.9027 C0.629 0.7796 0.371 0.7796 0.1637 0.9027 L0 1 L0.0973 0.8363 C0.2204 0.629 0.2204 0.371 0.0973 0.1637 L0 0 L0.1637 0.0973 C0.371 0.2204 0.629 0.2204 0.8363 0.0973 L1 0 Z"/>
+      </clipPath>
+    </defs>
+  </svg>
+
+
+<div class="scroll-wrapper">
+<div id="home"></div>
+  
+<div class="video-wrapper">
+  <div class="video-inner">
+    <button class="close-video">×</button>
+    <video autoplay muted playsinline loop preload="auto" class="custom-video">
+      <source src="https://rawcdn.githack.com/krivenkster/kaketobilo23/refs/heads/main/Teodor" type="video/mp4">
+    </video>
+  </div>
+</div>
+
+
+
+<div class="wrapper">
+<div class="sidebar-wrapper">
+ <div class="uc-sidebar-container"> 
+  <!-- Заголовок -->
+  <div class="sidebar-header">
+    <div class="title-wrapper"> 
+      <div class="bulldog-wrapper">
+        <img src="https://static.tildacdn.com/tild6665-3637-4136-a366-643537386264/bull.svg" class="bulldog-img" />
+        <img src="https://static.tildacdn.com/tild6438-6362-4163-b338-356463386133/angry_bull.svg" class="bulldog-img hover-img" />
+        <img src="https://static.tildacdn.com/tild6331-3963-4338-a538-303633663530/eyes.svg" class="bulldog-img parallax-element eyes-img" />
+      </div>
+      <div class="text-title1">
+        Олег
+      </div>
+        <div class="text-title">
+        Кривенко
+      </div>
+    </div> 
+    <div class="sidebar-menu">
+      <menu>
+  <li><a>Обо мне</a></li>
+</menu>
+     </div> 
+  </div>
+    <div class="sidebar-header-bg">
+   </div> 
+
+   
+  <!-- Миксер -->
+  <div class="sidebar-mixer">
+    <h3 class="title">Миксер</h3>
+    <div class="image-container">
+      <canvas class="pixel-canvas"></canvas>
+      <canvas class="pixel-canvas"></canvas>
+      <canvas class="pixel-canvas"></canvas>
+    </div>
+    <div class="shuffle-btn-wrapper">  
+  <button id="shuffle-btn">
+    <div class="shuffle-btn-title"> Микс </div>
+    <span class="dice-icon">🎲</span>
+      </button>
+  </div>
+  </div>
+   <div class="sidebar-mixer-bg">
+   </div>
+
+  <!-- Футер -->
+  <div class="sidebar-footer">
+    <div class="hover-wrapper">
+      <span class="trigger-word">@krivenxter</span>
+      <a href="https://drive.google.com/file/d/1E-4f4_BaKcX3QZADbZFESDe6TU9KP3Hm/view?usp=sharing" class="cv-button" target="_blank">CV</a>
+      <div class="hover-area"></div>
+      <div class="buttons-container">
+        <a href="mailto:qworlak@yandex.ru" target="_blank"><button class="custom-button">EMAIL</button></a>
+        <a href="https://t.me/okrivenko" target="_blank"><button class="custom-button">TG</button></a>
+        <a href="https://www.behance.net/qworlak" target="_blank"><button class="custom-button">BE</button></a>
+      </div>
+    </div>
+  </div>
+ </div>
+ </div>
+ 
+<div class="button-wrapper-fixed">
+    <div class="button-wrapper-header">
+      <div class="button-wrapper-header-2">
+  <a href="#"><button class="contact-button">
+    <span class="label">Написать</span>
+    <span class="icon">☘</span>
+    </button></a>
+  <div class="contact-form-wrapper">
+    <div class="form-success-message">Спасибо! Скоро вам отвечу ❤️</div>
+    <form class="contact-form" id="custom-form">
+      <div class="form-group">
+      <label for="name">Пару слов — и в бой</label>
+        
+           <button type="button" class="close-contact-form">×</button>
+      </div>
+      <input type="text" placeholder="Имя" name="name" required>
+      <input type="text" placeholder="Email или Telegram" name="contact" required>
+      <textarea placeholder="Сообщение" name="message" required></textarea>
+      <button type="submit">Отправить</button>
+    </form>
+  </div>
+</div>
+</div>
+  </div>
+
+
+
+
+
+<div class="content-wrapper">
+         <div class="top-text">
+            <div class="top-text-text1">Коммуникационный дизайнер и арт-директор. Стремлюсь рассказывать о сложных вещах простым и ярким визуальным языком</div>
+            <div class="top-text-text2">В данный момент развиваюсь как head of design в
+            <a href="https://calltouch.ru" target="_blank" rel="noopener noreferrer">Calltouch</a>
+        </div>
+         </div>
+         
+     <div class="tabs">
+      <div class="tab tab-all">Все проекты</div>
+      <div class="tab tab-web">Веб</div>
+      <div class="tab tab-branding">Брендинг</div>
+      <div class="tab tab-motion">Моушн</div>
+    </div>
+    
+    <div class="tab-content content-all">
+        <div class="case-header">
+            <div class="case-title">Футболка +7(812)</div>
+            <div class="case-tags">3D AI</div>
+        </div>
+        <div class="case-images">
+            <img src="https://static.tildacdn.com/tild3938-3832-4037-b035-326138346638/Academy1.png"/>
+            <img src="https://static.tildacdn.com/tild3938-3832-4037-b035-326138346638/Academy1.png"/>
+        </div>
+    </div>
+    <div class="tab-content content-web">
+        <div class="case-header">
+            <div class="case-title">Сайт мероприятий Calltouch</div>
+            <div class="case-tags">Веб</div>
+        </div>
+        <div class="case-images">
+            <img src="https://static.tildacdn.com/tild3938-3832-4037-b035-326138346638/Academy1.png"/>
+            <img src="https://static.tildacdn.com/tild3938-3832-4037-b035-326138346638/Academy1.png"/>
+        </div>
+    </div>    
+    <div class="tab-content content-branding">
+        <div class="case-header">
+            <div class="case-title">Фирстиль Академии Calltouch</div>
+            <div class="case-tags">Брендинг</div>
+        </div>
+        <div class="case-images">
+            <img src="https://static.tildacdn.com/tild3938-3832-4037-b035-326138346638/Academy1.png"/>
+            <img src="https://static.tildacdn.com/tild3938-3832-4037-b035-326138346638/Academy1.png"/>
+        </div>
+    </div>
+    <div class="tab-content content-motion">
+        <div class="case-header">
+            <div class="case-title">Премия Calltouch Key Partner</div>
+            <div class="case-tags">Моушн 3D</div>
+        </div>
+        <div class="case-images">
+            <img src="https://static.tildacdn.com/tild3938-3832-4037-b035-326138346638/Academy1.png"/>
+            <img src="https://static.tildacdn.com/tild3938-3832-4037-b035-326138346638/Academy1.png"/>
+        </div>        
+    </div>
+</div> 
+ 
+</div>
+  
+  
+  </div>
