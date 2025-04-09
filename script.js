@@ -1,6 +1,38 @@
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const btnWrapper = document.querySelector('.shuffle-btn-wrapper');
+  if (!btnWrapper || !window.visualViewport) return;
+
+  function updatePosition() {
+    const offset = window.innerHeight - window.visualViewport.height;
+    btnWrapper.style.transform = `translateY(-${offset}px)`;
+  }
+
+  let ticking = false;
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updatePosition();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  ['resize', 'scroll'].forEach(event => {
+    window.visualViewport.addEventListener(event, requestTick);
+  });
+
+  ['orientationchange', 'touchstart', 'touchend'].forEach(event => {
+    window.addEventListener(event, () => {
+      setTimeout(updatePosition, 50); // немного позже, чтобы всё точно схватить
+    });
+  });
+
+  updatePosition();
+});
 
 
 // === ПАРАЛЛАКС ГЛАЗ ===
@@ -26,25 +58,9 @@ document.addEventListener('mouseleave', () => {
     });
 });
 
+
 // === ПИКСЕЛЬНЫЙ МИКСЕР + ЗУМ + КУБИК ===
 document.addEventListener("DOMContentLoaded", function () {
-
-      function updateShuffleBtnPosition() {
-    const btnWrapper = document.querySelector('.shuffle-btn-wrapper');
-    if (!btnWrapper || !window.visualViewport) return;
-
-    const viewportHeight = window.visualViewport.height;
-    const layoutHeight = window.innerHeight;
-    const offset = layoutHeight - viewportHeight;
-
-    btnWrapper.style.transform = `translateY(-${offset}px)`;
-  }
-
-  window.visualViewport?.addEventListener('resize', updateShuffleBtnPosition);
-  window.visualViewport?.addEventListener('scroll', updateShuffleBtnPosition);
-  window.addEventListener('orientationchange', updateShuffleBtnPosition);
-  updateShuffleBtnPosition();
-    
 const imageUrls = [
   "img/8marta2025.gif",
   "img/Academy1.png",
