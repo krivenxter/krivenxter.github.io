@@ -1,28 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-function hardForceUpdateBtnPosition() {
-  const btnWrapper = document.querySelector('.shuffle-btn-wrapper');
-  if (!btnWrapper || !window.visualViewport) return;
 
-  const viewportHeight = window.visualViewport.height;
-  const windowHeight = window.innerHeight;
-  const offset = windowHeight - viewportHeight;
-
-  // Принудительно задаем transform
-  btnWrapper.style.transform = `translateY(-${offset}px)`;
-}
-
-// Первый запуск
-hardForceUpdateBtnPosition();
-
-// Подписки
-window.visualViewport?.addEventListener('resize', hardForceUpdateBtnPosition);
-window.visualViewport?.addEventListener('scroll', hardForceUpdateBtnPosition);
-window.addEventListener('orientationchange', hardForceUpdateBtnPosition);
-
-// ⛏️ Хардкорный полинг (раз в 300мс)
-setInterval(hardForceUpdateBtnPosition, 300);
-  
-});
 
 // === ПАРАЛЛАКС ГЛАЗ ===
 document.addEventListener('mousemove', function(event) {
