@@ -996,10 +996,10 @@ z-index: 9999999999 !important;
   padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
   box-sizing: border-box;
   z-index: 99999;
-  background: white;
-  transform: translateY(0);
+  transform: translateY(0); /* будет меняться скриптом */
   transition: transform 0.3s ease-out;
 }
+
 
 
 
