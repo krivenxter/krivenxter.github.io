@@ -9,27 +9,6 @@ setVhUnit();
 
 
 
-const shuffleBtnWrapper = document.querySelector('.shuffle-btn-wrapper');
-
-// изначальная корректная позиция
-function updateBtnPosition() {
-  const viewportHeight = window.visualViewport.height;
-  const windowHeight = window.innerHeight;
-
-  const keyboardOrBarShown = viewportHeight < windowHeight - 100;
-
-  if (keyboardOrBarShown) {
-    // Панель или клавиатура открыта — приподнять кнопку
-    shuffleBtnWrapper.style.transform = 'translateY(-20px)';
-  } else {
-    // Всё ок — вернуть вниз
-    shuffleBtnWrapper.style.transform = 'translateY(0)';
-  }
-}
-
-// при ресайзе визуального вьюпорта
-window.visualViewport.addEventListener('resize', updateBtnPosition);
-window.visualViewport.addEventListener('scroll', updateBtnPosition);
 
 
 
@@ -666,4 +645,27 @@ document.addEventListener("DOMContentLoaded", () => {
     delay: 0.2 // чуть позже, чтобы не по голове сразу
   });
 });
+
+
+const shuffleBtnWrapper = document.querySelector('.shuffle-btn-wrapper');
+
+// изначальная корректная позиция
+function updateBtnPosition() {
+  const viewportHeight = window.visualViewport.height;
+  const windowHeight = window.innerHeight;
+
+  const keyboardOrBarShown = viewportHeight < windowHeight - 100;
+
+  if (keyboardOrBarShown) {
+    // Панель или клавиатура открыта — приподнять кнопку
+    shuffleBtnWrapper.style.transform = 'translateY(-20px)';
+  } else {
+    // Всё ок — вернуть вниз
+    shuffleBtnWrapper.style.transform = 'translateY(0)';
+  }
+}
+
+// при ресайзе визуального вьюпорта
+window.visualViewport.addEventListener('resize', updateBtnPosition);
+window.visualViewport.addEventListener('scroll', updateBtnPosition);
 
