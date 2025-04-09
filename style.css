@@ -32,7 +32,7 @@ html, body {
 }
 
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .footer-menu {
+  .shuffle-btn-wrapper {
     padding-bottom: calc(var(--safe-area-inset-bottom) + 1rem);
   }
 }
@@ -63,7 +63,7 @@ html, body {
 .sidebar-wrapper {
     top: 0;
     position: sticky !important;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -330,13 +330,6 @@ button#shuffle-btn {
     cursor: pointer;
     pointer-events: all;
   gap: 10px;
-  position: fixed;
-    max-width: calc(100vw - 40px);
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 10px;
-      padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
-  box-sizing: border-box;
 }
 
 button#shuffle-btn:hover  {
@@ -776,7 +769,7 @@ button#shuffle-btn:hover  {
 }
 
 @media (max-width: 960px) {
-  
+
   .sidebar-wrapper {
   height: calc(var(--vh, 1vh) * 100);
 }
@@ -1053,6 +1046,15 @@ z-index: 9999999999 !important;
   
 
 @media (max-width: 640px) {
+
+  button#shuffle-btn {
+  position: fixed;
+    max-width: calc(100vw - 40px);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 30px);
+}
   .content-wrapper {
     padding: 10px;
   }
