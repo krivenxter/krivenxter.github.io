@@ -239,7 +239,34 @@ shuffleBtn.addEventListener("click", () => {
 
   shuffleImages(); // <--- тут просто вызываем
 });
-  
+
+ // внутри DOMContentLoaded, после определения shuffleImages:
+const desktopBtn = document.getElementById("shuffle-btn");
+const mobileBtn = document.getElementById("shuffle-btn-mobile");
+
+const handleClick = (btn) => {
+  const angles = [360, 480, 615];
+  const randomAngle = angles[Math.floor(Math.random() * angles.length)];
+
+  const diceIcon = btn.querySelector(".dice-icon"); // ищем кубик внутри нажатой кнопки
+
+  diceIcon.classList.remove("rotate-animation");
+  diceIcon.style.transition = "none";
+  diceIcon.style.transform = "rotate(0deg)";
+  void diceIcon.offsetWidth;
+
+  requestAnimationFrame(() => {
+    diceIcon.classList.add("rotate-animation");
+    diceIcon.style.transition = "transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)";
+    diceIcon.style.transform = `rotate(${randomAngle}deg)`;
+  });
+
+  shuffleImages();
+};
+
+if (desktopBtn) desktopBtn.addEventListener("click", () => handleClick(desktopBtn));
+if (mobileBtn) mobileBtn.addEventListener("click", () => handleClick(mobileBtn));
+    
 closeBtn.addEventListener("click", () => {
 mobileImg.classList.remove("show");
 mobileImg.classList.add("hide");
