@@ -673,14 +673,17 @@ document.addEventListener("DOMContentLoaded", () => {
 function updateShuffleBtnPosition() {
   const btn = document.querySelector(".shuffle-btn-wrapper");
   const bg = document.querySelector(".sidebar-mixer-bg.mobile-fix-bg");
+  const imageContainer = document.querySelector(".mobile-image-container");
 
   if (!btn || !window.visualViewport) return;
 
   const offset = window.innerHeight - window.visualViewport.height;
 
   btn.style.transform = `translateY(-${offset}px)`;
-  if (bg) bg.style.transform = `translateY(-${offset}px)`; // ← тянем и фон
+  if (bg) bg.style.transform = `translateY(-${offset}px)`;
+  if (imageContainer) imageContainer.style.transform = `translate(-50%, -${offset}px)`; // 💥 фикс
 }
+
 
 
 // навешиваем обновление позиции при любом изменении viewport'а
