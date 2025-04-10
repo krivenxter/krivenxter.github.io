@@ -243,14 +243,13 @@ shuffleBtn.addEventListener("click", () => {
 const desktopBtn = document.getElementById("shuffle-btn");
 const mobileBtn = document.getElementById("shuffle-btn-mobile");
 
-const handleClick = (btn) => {
-  // ⛔ Глушим автоскролл
-  window.scrollTo(0, window.scrollY);
+const handleClick = (btn, event) => {
+  event.preventDefault(); // 💥 вот оно, ключевое
 
-  // ⛔ Снимаем фокус с кнопки
+  // Снимаем фокус
   btn.blur();
 
-  // 🎲 Анимация кубика
+  // Крутим кубик
   const angles = [360, 480, 615];
   const randomAngle = angles[Math.floor(Math.random() * angles.length)];
   const diceIcon = btn.querySelector(".dice-icon");
@@ -266,13 +265,14 @@ const handleClick = (btn) => {
     diceIcon.style.transform = `rotate(${randomAngle}deg)`;
   });
 
-  // 🎰 Запуск миксера
   shuffleImages();
 };
 
 
-if (desktopBtn) desktopBtn.addEventListener("click", () => handleClick(desktopBtn));
-if (mobileBtn) mobileBtn.addEventListener("click", () => handleClick(mobileBtn));
+
+if (desktopBtn) desktopBtn.addEventListener("click", (e) => handleClick(desktopBtn, e));
+if (mobileBtn) mobileBtn.addEventListener("click", (e) => handleClick(mobileBtn, e));
+
     
 closeBtn.addEventListener("click", () => {
 mobileImg.classList.remove("show");
