@@ -336,6 +336,26 @@ button#shuffle-btn:hover  {
 
 }
 
+button#shuffle-btn-mobile {
+    background-color: black;
+    border-radius: 30px;
+    border: 0px;
+    width: 100%;
+    height: 34px;
+    padding: 4px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: all;
+  gap: 10px;
+}
+
+button#shuffle-btn-mobile:hover  {
+    background-color: #353535 !important;
+
+}
+
 .bulldog-img {
     width: 44px;
     height: 44px;
@@ -767,9 +787,33 @@ button#shuffle-btn:hover  {
   display: none; /* по умолчанию скрыта */
 }
 
+.rotate-animation {
+  transform-origin: center;
+}
+
+.mobile-only {
+  display: none;
+}
+
 @media (max-width: 960px) {
 
-  
+    .shuffle-btn-wrapper.mobile-only {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+    padding: 12px;
+    pointer-events: all;
+    background: white; /* опционально */
+    transition: transform 0.3s ease;
+  }
+
+  /* И наоборот — скрываем старую кнопку на мобилке */
+  .sidebar-mixer .shuffle-btn-wrapper:not(.mobile-only) {
+    display: none !important;
+  }
   
 .mobile-image-container {
   display: flex;
