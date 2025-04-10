@@ -466,6 +466,7 @@ button#shuffle-btn-mobile:hover  {
     transition: opacity 0.2s ease-in-out;
     pointer-events: none;
     justify-content: flex-start;
+    position: absolute;
 }
 
 .trigger-word:hover ~ .buttons-container,
@@ -477,7 +478,7 @@ button#shuffle-btn-mobile:hover  {
 .custom-button {
   color: gray;
   border: none;
-  font-size: 12px;
+  font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
   background: transparent;
