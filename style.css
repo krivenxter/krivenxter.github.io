@@ -1023,7 +1023,7 @@ z-index: 9999999999 !important;
     z-index: 9999998;
     filter: blur(14px);
     overflow: visible;
-    inset: -68px;
+    inset: -60px;
     opacity: 1;
 }
 
