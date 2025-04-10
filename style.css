@@ -176,7 +176,7 @@ html, body {
     opacity: 0;
     max-width: 440px;
     max-height: 440px;
-    border-radius: 30px;
+    border-radius: 16px;
     pointer-events: none;
     z-index: 9999;
     object-fit: contain;
@@ -805,6 +805,10 @@ button#shuffle-btn-mobile:hover  {
 }
 
 @media (max-width: 960px) {
+
+.case-images img {
+    border-radius: 10px;
+}
 
   .sidebar-mixer-bg.mobile-fix-bg {
   position: fixed;
