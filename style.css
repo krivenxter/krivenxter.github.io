@@ -1119,6 +1119,7 @@ z-index: 9999999999 !important;
 button#shuffle-btn-mobile {
 height: auto;
  padding: 12px 0px;
+max-width: calc(100vw - 52px);
 }
 
 .tab {
