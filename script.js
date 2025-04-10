@@ -237,7 +237,6 @@ shuffleBtn.addEventListener("click", () => {
     diceIcon.style.transform = `rotate(${randomAngle}deg)`;
   });
 
-  shuffleImages(); // <--- тут просто вызываем
 });
 
  // внутри DOMContentLoaded, после определения shuffleImages:
