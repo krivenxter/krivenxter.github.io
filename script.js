@@ -681,7 +681,7 @@ function updateShuffleBtnPosition() {
 
   if (btn) btn.style.transform = `translateY(-${offset}px)`;
   if (bg) bg.style.transform = `translateY(-${offset}px)`;
-  if (mobileImgContainer) mobileImgContainer.style.transform = `translate(-50%, calc(20px - ${offset}px))`;
+  if (mobileImgContainer) mobileImgContainer.style.transform = `translate(-50%, calc(30px - ${offset}px))`;
 }
 
 
