@@ -806,7 +806,6 @@ button#shuffle-btn-mobile:hover  {
     z-index: 99999;
     padding: 12px;
     pointer-events: all;
-    background: white; /* опционально */
     transition: transform 0.3s ease;
   }
 
