@@ -670,15 +670,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
 function updateShuffleBtnPosition() {
   const btn = document.querySelector(".shuffle-btn-wrapper");
+  const bg = document.querySelector(".sidebar-mixer-bg.mobile-fix-bg");
+
   if (!btn || !window.visualViewport) return;
 
   const offset = window.innerHeight - window.visualViewport.height;
+
   btn.style.transform = `translateY(-${offset}px)`;
+  if (bg) bg.style.transform = `translateY(-${offset}px)`; // ← тянем и фон
 }
+
 
 // навешиваем обновление позиции при любом изменении viewport'а
 if (window.visualViewport) {
