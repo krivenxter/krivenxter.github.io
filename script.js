@@ -481,6 +481,32 @@ document.addEventListener("DOMContentLoaded", () => {
       showContent("all");
     });
   }
+
+    const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (
+      entry.isIntersecting &&
+      entry.target.classList.contains("content-active") &&
+      !entry.target.classList.contains("was-animated")
+    ) {
+      const items = entry.target.querySelectorAll(".case-header, .case-images img");
+
+      gsap.fromTo(items,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.1 }
+      );
+
+      entry.target.classList.add("was-animated");
+    }
+  });
+}, {
+  threshold: 0.15
+});
+
+document.querySelectorAll(".tab-content").forEach(el => {
+  observer.observe(el);
+});
+
 });
 
 
