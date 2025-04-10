@@ -815,7 +815,7 @@ button#shuffle-btn-mobile:hover  {
   bottom: -15px;
   left: 0;
   width: 100%;
-  height: 100px;
+  height: 110px;
   background: white;
   filter: blur(15px);
   z-index: -1;
@@ -1238,10 +1238,7 @@ button#shuffle-btn {
    margin-bottom: 10px !important;
   }
   
-      .sidebar-header-bg {
-         height: 145px;
-  }
-
+ 
 
       .sidebar-mixer {
    padding: 10px 20px;  
