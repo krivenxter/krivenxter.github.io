@@ -1116,9 +1116,9 @@ z-index: 9999999999 !important;
 
 @media (max-width: 640px) {
 
-.button#shuffle-btn-mobile {
+button#shuffle-btn-mobile {
 height: auto;
-    padding: 12px 0px;
+ padding: 12px 0px;
 }
 
 .tab {
