@@ -103,7 +103,7 @@ mobileImgWrapper.appendChild(closeBtn);
 
 
 // Вместо .sidebar-mixer встраиваем в шапку, чтобы быть поверх blur
-document.querySelector(".uc-sidebar-container").appendChild(mobileImgWrapper);
+document.body.appendChild(mobileImgWrapper);
 
 
   function getRandomImages(count = 3) {
@@ -673,16 +673,17 @@ document.addEventListener("DOMContentLoaded", () => {
 function updateShuffleBtnPosition() {
   const btn = document.querySelector(".shuffle-btn-wrapper");
   const bg = document.querySelector(".sidebar-mixer-bg.mobile-fix-bg");
-  const imageContainer = document.querySelector(".mobile-image-container");
+  const mobileImgContainer = document.querySelector(".mobile-image-container");
 
-  if (!btn || !window.visualViewport) return;
+  if (!window.visualViewport) return;
 
   const offset = window.innerHeight - window.visualViewport.height;
 
-  btn.style.transform = `translateY(-${offset}px)`;
+  if (btn) btn.style.transform = `translateY(-${offset}px)`;
   if (bg) bg.style.transform = `translateY(-${offset}px)`;
-  if (imageContainer) imageContainer.style.transform = `translate(-50%, -${offset}px)`; // 💥 фикс
+  if (mobileImgContainer) mobileImgContainer.style.transform = `translate(-50%, calc(20px - ${offset}px))`;
 }
+
 
 
 
