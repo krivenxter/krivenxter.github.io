@@ -724,4 +724,42 @@ if (window.visualViewport) {
 document.addEventListener("DOMContentLoaded", updateShuffleBtnPosition);
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const wrapper = entry.target;
+        const src = wrapper.dataset.src;
+        const poster = wrapper.dataset.poster || "";
+
+        if (!wrapper.querySelector("video")) {
+          const video = document.createElement("video");
+          video.setAttribute("autoplay", "");
+          video.setAttribute("muted", "");
+          video.setAttribute("playsinline", "");
+          video.setAttribute("loop", "");
+          if (poster) video.setAttribute("poster", poster);
+          video.style.width = "100%";
+          video.style.borderRadius = "16px";
+          video.style.boxShadow = "#0000002b 0px 5px 10px";
+
+          const source = document.createElement("source");
+          source.src = src;
+          source.type = "video/mp4";
+
+          video.appendChild(source);
+          wrapper.appendChild(video);
+        }
+
+        observer.unobserve(wrapper);
+      }
+    });
+  }, {
+    threshold: 0.3
+  });
+
+  document.querySelectorAll(".lazy-video-wrapper").forEach(wrapper => {
+    observer.observe(wrapper);
+  });
+});
 
