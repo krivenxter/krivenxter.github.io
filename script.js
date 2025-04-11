@@ -725,18 +725,3 @@ document.addEventListener("DOMContentLoaded", updateShuffleBtnPosition);
 
 
 
-function fixVideoPixelRounding() {
-  document.querySelectorAll("video").forEach(video => {
-    const rect = video.getBoundingClientRect();
-    video.style.width = Math.round(rect.width) + "px";
-    video.style.height = Math.round(rect.height) + "px";
-  });
-}
-
-window.addEventListener("load", fixVideoPixelRounding);
-
-window.addEventListener("resize", () => {
-  setTimeout(fixVideoPixelRounding, 100); // ждём, пока браузер закончится дрочить с layout
-});
-
-
