@@ -42,15 +42,6 @@ video {
     box-shadow: #0000002b 0px 5px 10px;
 }
 
-.lazy-video-wrapper {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background-color: #000;
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-
 .preload-hidden {
   opacity: 0 !important;
   transform: translateY(40px);
