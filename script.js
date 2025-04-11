@@ -460,6 +460,11 @@ document.addEventListener("DOMContentLoaded", () => {
       { opacity: 0, y: 30 }, 
       { opacity: 1, y: 0, duration: 0.8, ease: "none", stagger: 0.1 }
     );
+
+document.querySelectorAll(".lazy-video-wrapper").forEach(wrapper => {
+  observer.observe(wrapper); // <- переобновляем observer при переключении табов
+});
+
   }
 
   // === навешиваем клики на табы
