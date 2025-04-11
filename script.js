@@ -722,3 +722,13 @@ if (window.visualViewport) {
 
 // вызываем при загрузке
 document.addEventListener("DOMContentLoaded", updateShuffleBtnPosition);
+
+window.addEventListener("load", () => {
+  const video = document.querySelector("video");
+  if (video) {
+    const rect = video.getBoundingClientRect();
+    video.style.width = Math.round(rect.width) + "px";
+    video.style.height = Math.round(rect.height) + "px";
+  }
+});
+
