@@ -35,6 +35,19 @@ html, body {
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
 }
 
+button.close-contact-form {
+    background: none;
+    color: #ffffff85;
+    font-size: 48px;
+    font-family: math;
+}
+
+button.close-contact-form:hover {
+    background: none;
+    color: white;
+    font-size: 48px;
+    font-family: math;
+}
 
 video {
     width: 100%;
@@ -1232,7 +1245,7 @@ button#shuffle-btn {
 }
   
   .contact-form-wrapper {
-  top: 10px;
+  top: 20px;
   right: 10px;
   border-radius: 24px;
   }
