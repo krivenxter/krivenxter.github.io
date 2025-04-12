@@ -1276,5 +1276,9 @@ button#shuffle-btn {
    height: 110px; 
     filter: blur(14px);
   }
+
+video.lazy-video {
+	border-radius: 10px;
+}
 }
 
