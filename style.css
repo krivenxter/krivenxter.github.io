@@ -55,12 +55,11 @@ video {
     box-shadow: #0000002b 0px 5px 10px;
 }
 
-video.lazy-video-1 {
+video.lazy-video {
   width: 100%;
   border-radius: 16px;
   display: block;
   box-shadow: #0000002b 0px 5px 10px;
-  aspect-ratio: 16 / 7.7;
 }
 
 
