@@ -36,13 +36,18 @@ html, body {
 }
 
 
+video {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: #0000002b 0px 5px 10px;
+}
+
 video.lazy-video {
   width: 100%;
   border-radius: 16px;
   display: block;
   box-shadow: #0000002b 0px 5px 10px;
 }
-
 
 
 .preload-hidden {

@@ -723,3 +723,5 @@ if (window.visualViewport) {
 // вызываем при загрузке
 document.addEventListener("DOMContentLoaded", updateShuffleBtnPosition);
 
+
+
