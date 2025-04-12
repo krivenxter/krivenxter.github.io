@@ -36,6 +36,13 @@ html, body {
 }
 
 
+.lazy-video-wrapper {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+
 video {
     width: 100%;
     border-radius: 16px;
