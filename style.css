@@ -57,9 +57,13 @@ video {
 
 video.lazy-video {
   width: 100%;
+height: auto;
   border-radius: 16px;
   display: block;
   box-shadow: #0000002b 0px 5px 10px;
+  will-change: transform;
+  transform: translateZ(0);
+aspect-ratio: 16/9:
 }
 
 
