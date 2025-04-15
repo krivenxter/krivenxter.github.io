@@ -65,6 +65,7 @@ height: auto;
   transform: translateZ(0);
 aspect-ratio: 16/9:
 contain: layout style;
+opacity: 0.99; /* chrome windows anti-lag hack */
 }
 
 .lazy-video {
