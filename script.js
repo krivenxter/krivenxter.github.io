@@ -725,3 +725,16 @@ document.addEventListener("DOMContentLoaded", updateShuffleBtnPosition);
 
 
 
+document.querySelectorAll('video').forEach(video => {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+
+  observer.observe(video);
+});
