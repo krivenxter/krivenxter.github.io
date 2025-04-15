@@ -738,3 +738,24 @@ document.querySelectorAll('video').forEach(video => {
 
   observer.observe(video);
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const videos = document.querySelectorAll('.case-images video');
+
+  videos.forEach(video => {
+    const caseBlock = video.closest('.tab-content');
+    const videoWrapper = video.closest('.case-images');
+    const title = videoWrapper?.previousElementSibling?.querySelector('.case-title');
+
+    if (title) {
+      video.addEventListener('mouseenter', () => {
+        title.classList.add('hovered');
+      });
+
+      video.addEventListener('mouseleave', () => {
+        title.classList.remove('hovered');
+      });
+    }
+  });
+});

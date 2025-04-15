@@ -117,7 +117,6 @@ video {
 }
 
 video.lazy-video {
-
     width: 100%;
     height: auto;
     border-radius: 12px;
@@ -128,30 +127,7 @@ video.lazy-video {
     contain: layout style;
     opacity: 0.99;
     border: solid 1px #8787876b;
-    box-shadow: none !important;
-	 width: 100%;
-	height: auto;
-  border-radius: 16px;
-  display: block;
-  box-shadow: #0000002b 0px 5px 10px;
-  will-change: transform;
-  transform: translateZ(0);
-aspect-ratio: 16/9:
-contain: layout style;
-opacity: 0.99; /* chrome windows anti-lag hack */
-}
-
-.lazy-video {
-  width: 100%;
-height: auto;
-  border-radius: 16px;
-  display: block;
-  box-shadow: #0000002b 0px 5px 10px;
-  will-change: transform;
-  transform: translateZ(0);
-aspect-ratio: 16/9:
-contain: layout style;
-
+    box-shadow: none;
 }
 
 .preload-hidden {
@@ -666,7 +642,6 @@ button#shuffle-btn-mobile:hover  {
   mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="white" d="M100 0 L90.27 16.37 C77.96 37.1 77.96 62.9 90.27 83.63 L100 100 L83.63 90.27 C62.9 77.96 37.1 77.96 16.37 90.27 L0 100 L9.73 83.63 C22.04 62.9 22.04 37.1 9.73 16.37 L0 0 L16.37 9.73 C37.1 22.04 62.9 22.04 83.63 9.73 L100 0 Z"/></svg>');
   mask-size: cover;
   mask-repeat: no-repeat;
- aspect-ratio: auto !important;
 }
   
 .close-video {
@@ -756,11 +731,31 @@ button#shuffle-btn-mobile:hover  {
   padding: 0px 5px;
 }
 
+.video-section:has(.video-link:hover) .button {
+  background: #ff2d55;
+  color: white;
+  transform: scale(1.05);
+}
+
 .case-title {
   font-size: 18px;
   font-weight: 600;
   color: #000;
 }
+
+
+
+.case-title,
+.case-title a {
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.case-title.hovered,
+.case-title.hovered a {
+  color: #353535 !important;
+  transform: scale(1.02) translateX(2px);
+}
+
 
 .case-tags {
   font-size: 12px;
