@@ -117,7 +117,7 @@ video {
 }
 
 video.lazy-video {
-<<<<<<< HEAD
+
     width: 100%;
     height: auto;
     border-radius: 12px;
@@ -128,10 +128,9 @@ video.lazy-video {
     contain: layout style;
     opacity: 0.99;
     border: solid 1px #8787876b;
-    box-shadow: none;
-=======
-  width: 100%;
-height: auto;
+    box-shadow: none !important;
+	 width: 100%;
+	height: auto;
   border-radius: 16px;
   display: block;
   box-shadow: #0000002b 0px 5px 10px;
@@ -152,7 +151,7 @@ height: auto;
   transform: translateZ(0);
 aspect-ratio: 16/9:
 contain: layout style;
->>>>>>> 3ff460d90429a6ee018c35b46138853d533d1833
+
 }
 
 .preload-hidden {
