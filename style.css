@@ -1248,6 +1248,24 @@ z-index: 9999999999 !important;
     }
   
 
+.close-video {
+    color: white;
+    position: absolute;
+    right: 35px;
+    background: transparent;
+    border: none;
+    font-size: 56px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10000;
+    width: 98%;
+    text-align: right;
+    /* margin-top: 20px; */
+    top: 25px;
+    width: 100%;
+    text-align: right;
+}
+
 }
 
   
@@ -1300,24 +1318,7 @@ button#shuffle-btn {
   .text-title1 {
     top: 1px;
 }
-  .close-video {
-    color: white;
-    position: absolute;
-    right: 5px;
-    background: transparent;
-    border: none;
-    font-size: 50px;
-    line-height: 1;
-    cursor: pointer;
-    z-index: 10000;
-    border-radius: 50%;
-    width: 98%;
-    text-align: right;
-    /* margin-top: 20px; */
-    top: 40px;
-    width: 100%;
-    text-align: right;
-}
+
  
   .sidebar-header {
    padding: 10px; 
