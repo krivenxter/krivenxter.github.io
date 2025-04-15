@@ -667,6 +667,7 @@ button#shuffle-btn-mobile:hover  {
   mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="white" d="M100 0 L90.27 16.37 C77.96 37.1 77.96 62.9 90.27 83.63 L100 100 L83.63 90.27 C62.9 77.96 37.1 77.96 16.37 90.27 L0 100 L9.73 83.63 C22.04 62.9 22.04 37.1 9.73 16.37 L0 0 L16.37 9.73 C37.1 22.04 62.9 22.04 83.63 9.73 L100 0 Z"/></svg>');
   mask-size: cover;
   mask-repeat: no-repeat;
+ aspect-ratio: auto !important;
 }
   
 .close-video {
