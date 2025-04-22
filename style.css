@@ -101,7 +101,7 @@ a.logo-link {
     display: flex;
     transform: translateX(-50%) !important;
   top: 4px;
-  zoom: 1;
+  zoom: 0.98;
 }
 
 .sidebar-dog.loaded {
