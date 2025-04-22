@@ -102,7 +102,7 @@ a.logo-link {
     display: flex;
     transform: translateX(-50%) !important;
   top: 4px;
-  zoom: 1.04;
+  zoom: 1;
 }
 
 .sidebar-dog.loaded {
@@ -273,9 +273,10 @@ video.lazy-video {
 
 .shuffle-btn-wrapper {
     width: 80%;
-    padding: 20p;
     box-sizing: border-box;
   padding-bottom: 4px;
+  transform: none !important;
+
 }
 
 .sidebar-mixer h3.title {
