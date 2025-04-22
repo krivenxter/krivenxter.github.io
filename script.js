@@ -1,3 +1,37 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const loader = document.querySelector(".sidebar-dog-loader");
+
+  const waitForSpline = setInterval(() => {
+    const spline = document.querySelector("spline-viewer");
+    if (spline && spline.shadowRoot) {
+      clearInterval(waitForSpline);
+
+      const shadowRoot = spline.shadowRoot;
+
+      const checkReady = setInterval(() => {
+        const canvas = shadowRoot.querySelector("canvas");
+        if (canvas) {
+          clearInterval(checkReady);
+
+          // Убираем логотип, если он ещё жив
+          const logo = shadowRoot.querySelector("#logo");
+          if (logo) logo.remove();
+
+          // Добавляем loaded + скрываем лоадер с небольшой задержкой
+          spline.closest(".sidebar-dog")?.classList.add("loaded");
+
+          setTimeout(() => {
+            loader?.classList.add("hidden");
+          }, 100); // можно увеличить до 300–500, если надо плавнее
+        }
+      }, 50);
+    }
+  }, 50);
+});
+
+
+
+
 
 
 // === ПАРАЛЛАКС ГЛАЗ ===
@@ -395,7 +429,7 @@ window.addEventListener("resize", () => {
 
 // === Видос по клику на бульдога ===
 document.addEventListener("DOMContentLoaded", function () {
-  const trigger = document.querySelector(".bulldog-wrapper");
+  const trigger = document.querySelector(".sidebar-dog");
   const videoWrapper = document.querySelector(".video-wrapper");
   const closeBtn = document.querySelector(".close-video");
   const video = document.querySelector(".custom-video");
@@ -426,7 +460,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (
         videoWrapper.classList.contains("active") &&
         !e.target.closest(".video-inner") &&
-        !e.target.closest(".bulldog-wrapper")
+        !e.target.closest(".sidebar-dog")
       ) {
         video.pause();
         videoWrapper.classList.remove("active");
@@ -630,7 +664,7 @@ if (res.ok) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const title = document.querySelector(".title-wrapper");
-  const bulldog = document.querySelector(".bulldog-wrapper");
+  const bulldog = document.querySelector(".sidebar-dog");
 
   // Клик по булке — открытие видео и стоп всплытия
   bulldog.addEventListener("click", (e) => {
