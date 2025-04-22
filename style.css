@@ -892,6 +892,7 @@ aspect-ratio: auto !important;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  overflow: hidden;
   
 }
 
