@@ -793,3 +793,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const buttonsContainer = document.querySelector(".sidebar-footer-mobile .buttons-container");
+  const hoverWrapper = document.querySelector(".sidebar-footer-mobile .hover-wrapper");
+
+  if (!buttonsContainer || !hoverWrapper) return;
+
+  // Клик по триггеру — toggle
+  hoverWrapper.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const isVisible = buttonsContainer.classList.contains("visible");
+
+    buttonsContainer.classList.toggle("visible");
+    buttonsContainer.style.opacity = isVisible ? "0" : "1";
+    buttonsContainer.style.pointerEvents = isVisible ? "none" : "auto";
+  });
+
+  // Клик вне — скрыть
+  document.addEventListener("click", (e) => {
+    const clickedInside = buttonsContainer.contains(e.target) || hoverWrapper.contains(e.target);
+    if (!clickedInside && buttonsContainer.classList.contains("visible")) {
+      buttonsContainer.classList.remove("visible");
+      buttonsContainer.style.opacity = "0";
+      buttonsContainer.style.pointerEvents = "none";
+    }
+  });
+});
+
+
+
+
