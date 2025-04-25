@@ -61,6 +61,7 @@ document.addEventListener('mouseleave', () => {
 // === ПИКСЕЛЬНЫЙ МИКСЕР + ЗУМ + КУБИК ===
 document.addEventListener("DOMContentLoaded", function () {
 const imageUrls = [
+ "https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/video/Vizitki_anim2.mp4", "https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/video/812_vfx_final.mp4", "https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/video/poster-sod-spb.mp4",
             "https://static.tildacdn.com/tild3365-6364-4364-b339-343536333162/ezgif-4-01cd93db62.gif",
             "https://static.tildacdn.com/tild6530-3839-4238-b436-656136623839/Quiz22_Bad_v2.jpg",
             "https://static.tildacdn.com/tild6536-6232-4138-b039-623263393739/email-rocket.gif",
@@ -144,53 +145,128 @@ document.body.appendChild(mobileImgWrapper);
     return [...imageUrls].sort(() => 0.5 - Math.random()).slice(0, count);
   }
 
-  function loadImageWithPixelEffect(canvas, imageUrl) {
-    const ctx = canvas.getContext("2d");
-    canvas.width = 100;
-    canvas.height = 100;
+// Храним текущее видео-поток для остановки
+let currentVideo = null;
+
+// Загружаем медиа
+function loadMediaWithPixelEffect(canvas, url) {
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+
+  // --- ❗ ОСТАНАВЛИВАЕМ И УБИВАЕМ СТАРОЕ ВИДЕО ---
+  if (canvas.currentVideo) {
+    canvas.currentVideo.pause();
+    canvas.currentVideo.src = "";
+    canvas.currentVideo.load();
+    canvas.currentVideo.remove();
+    cancelAnimationFrame(canvas.animationFrameId);
+    canvas.currentVideo = null;
+    canvas.animationFrameId = null;
+  }
+
+
+  canvas.onmouseenter = (e) => showZoomPreview(e, url);
+  canvas.onmousemove = (e) => moveZoomPreview(e);
+  canvas.onmouseleave = hideZoomPreview;
+
+  if (url.endsWith(".mp4")) {
+    const video = document.createElement("video");
+    video.src = url;
+    video.muted = true;
+    video.playsInline = true;
+    video.loop = true;
+    video.crossOrigin = "anonymous";
+    video.preload = "auto";
+    // 🔥 ДОБАВЬ ЭТО
+video.style.objectFit = "cover";
+video.style.width = "100%";
+video.style.height = "100%";
+video.style.display = "none"; // прячем до готовности
+
+video.addEventListener("loadeddata", () => {
+  video.play();
+
+  // 💥 СТАВИМ КАНВАС СРАЗУ НА ФИНАЛЬНЫЕ РАЗМЕРЫ
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+
+  let scaleSteps = [5, 10, 20, 40, 80, 100];
+  let stepIndex = 0;
+
+
+function pixelateVideo() {
+  if (stepIndex >= scaleSteps.length) {
+    ctx.imageSmoothingEnabled = true;
+    startVideoLoop(); // нормальная отрисовка видео
+    return;
+  }
+
+  let scale = scaleSteps[stepIndex++];
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // 💥 Делаем уменьшение: маленький слой -> растягиваем на весь канвас
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height, 0, 0, scale, scale);
+  ctx.drawImage(canvas, 0, 0, scale, scale, 0, 0, canvas.width, canvas.height);
+
+  setTimeout(pixelateVideo, 100);
+}
+
+
+      function startVideoLoop() {
+        function render() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          canvas.animationFrameId = requestAnimationFrame(render);
+        }
+        render();
+      }
+
+      pixelateVideo();
+    });
+
+    // сохраняем видео, чтобы потом остановить
+    canvas.currentVideo = video;
+
+  } else {
     const img = new Image();
     img.crossOrigin = "Anonymous";
-    img.src = imageUrl;
+    img.src = url;
 
-    canvas.onmouseenter = (e) => showZoomPreview(e, imageUrl);
-    canvas.onmousemove = (e) => moveZoomPreview(e);
-    canvas.onmouseleave = hideZoomPreview;
+img.onload = function () {
+  let scaleSteps = [5, 10, 20, 40, 80, 100];
+  let stepIndex = 0;
+  let imgRatio = img.width / img.height;
+  let cropSize = imgRatio > 1 ? img.height : img.width;
+  let sx = (img.width - cropSize) / 2;
+  let sy = (img.height - cropSize) / 2;
 
-    img.onload = function () {
-      let scaleSteps = [5, 10, 20, 40, 80, 100];
-      let stepIndex = 0;
-      let imgRatio = img.width / img.height;
-      let cropSize = imgRatio > 1 ? img.height : img.width;
-      let sx = (img.width - cropSize) / 2;
-      let sy = (img.height - cropSize) / 2;
+  function drawPixelated() {
+    if (stepIndex >= scaleSteps.length) {
+      ctx.imageSmoothingEnabled = true;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, sx, sy, cropSize, cropSize, 0, 0, canvas.width, canvas.height);
+      return;
+    }
 
-      function drawPixelated() {
-        let scale = scaleSteps[stepIndex++];
-        if (scale >= 100) {
-          canvas.width = img.naturalWidth;
-          canvas.height = img.naturalHeight;
-          ctx.imageSmoothingEnabled = true;
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        } else {
-          ctx.imageSmoothingEnabled = false;
-          ctx.clearRect(0, 0, 100, 100);
-          ctx.drawImage(img, sx, sy, cropSize, cropSize, 0, 0, scale, scale);
-          ctx.drawImage(canvas, 0, 0, scale, scale, 0, 0, 100, 100);
-          setTimeout(drawPixelated, 100);
-          
-         // Показываем анимацию
-mobileImg.classList.remove("hide");
-mobileImg.classList.add("show", "pixel-anim");
+    let scale = scaleSteps[stepIndex++];
+    ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-// Снимаем класс после анимации, чтобы можно переиспользовать
+    ctx.drawImage(img, sx, sy, cropSize, cropSize, 0, 0, scale, scale);
+    ctx.drawImage(canvas, 0, 0, scale, scale, 0, 0, canvas.width, canvas.height);
 
-        }
-      }
+    setTimeout(drawPixelated, 100);
+  }
 
       drawPixelated();
     };
+      }
+
   }
+
   
   function isMobile() {
     return window.innerWidth <= 960;
@@ -200,55 +276,73 @@ mobileImg.classList.add("show", "pixel-anim");
 function shuffleImages() {
   const randomImages = getRandomImages();
 
-if (isMobile()) {
-  const [randomImage] = randomImages;
+  if (isMobile()) {
+    const [randomMedia] = randomImages;
 
-  mobileImg.classList.remove("show");
-  mobileImg.classList.add("hide");
+    mobileImg.classList.remove("show");
+    mobileImg.classList.add("hide");
 
-  setTimeout(() => {
-    const tempImg = new Image();
-    tempImg.src = randomImage;
+    setTimeout(() => {
+      // Очистить контейнер
+      mobileImgWrapper.innerHTML = '';
 
-tempImg.onload = () => {
-  mobileImg.src = randomImage;
+      if (randomMedia.endsWith('.mp4')) {
+        // Если видео
+        const video = document.createElement('video');
+        video.src = randomMedia;
+        video.autoplay = true;
+        video.loop = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.className = 'mobile-video';
+        mobileImgWrapper.appendChild(video);
 
-  // форсим перерисовку изображения
-  void mobileImg.offsetWidth;
+        // Добавляем кнопку закрытия снова
+        mobileImgWrapper.appendChild(closeBtn);
 
-  mobileImg.classList.remove("hide");
-  mobileImgWrapper.classList.remove("hide");
-  mobileImg.classList.add("show");
-  mobileImgWrapper.classList.add("show");
+        void video.offsetWidth;
 
-// 💥 ПЕРЕЗАПУСК АНИМАЦИИ КРЕСТИКА
-closeBtn.classList.remove("show", "hide");
+        mobileImgWrapper.classList.remove("hide");
+        mobileImgWrapper.classList.add("show");
+        video.classList.add("show");
 
-// форс ремап потока
-void closeBtn.offsetWidth;
+      } else {
+        // Если обычная картинка
+        const tempImg = new Image();
+        tempImg.src = randomMedia;
+        tempImg.className = "mobile-image";
 
-// сброс анимации
-closeBtn.style.transition = "none";
-closeBtn.classList.remove("show");
-closeBtn.classList.add("hide");
+        tempImg.onload = () => {
+          mobileImgWrapper.appendChild(tempImg);
+          mobileImgWrapper.appendChild(closeBtn);
 
-// ещё один форс релоад
-void closeBtn.offsetWidth;
+          void tempImg.offsetWidth;
 
-// заново включаем анимацию и возвращаем transition
-closeBtn.style.transition = ""; // или явно: "opacity 0.3s ease, transform 0.3s ease";
-closeBtn.classList.remove("hide");
-closeBtn.classList.add("show");
+          mobileImgWrapper.classList.remove("hide");
+          mobileImgWrapper.classList.add("show");
+          tempImg.classList.add("show");
+        };
+      }
 
-};
-}, 100);
-}
- else {
+      // Обновляем кросс-кнопку
+      closeBtn.classList.remove("show", "hide");
+      void closeBtn.offsetWidth;
+      closeBtn.style.transition = "none";
+      closeBtn.classList.remove("show");
+      closeBtn.classList.add("hide");
+      void closeBtn.offsetWidth;
+      closeBtn.style.transition = "";
+      closeBtn.classList.remove("hide");
+      closeBtn.classList.add("show");
+
+    }, 100);
+  } else {
     canvases.forEach((canvas, i) => {
-      loadImageWithPixelEffect(canvas, randomImages[i]);
+      loadMediaWithPixelEffect(canvas, randomImages[i]);
     });
   }
 }
+
 
 
   // 💥 ДОБАВЬ СЮДА это:
@@ -355,18 +449,57 @@ setTimeout(() => {
 
 
 
-  // Зум-превью работает только на десктопе
-  let zoomImage = null;
+let zoomImg = null;
+let zoomVideo = null;
 
-  if (!isMobile()) {
-    zoomImage = document.createElement("img");
-    zoomImage.className = "zoom-preview";
-    document.body.appendChild(zoomImage);
-  }
+if (!isMobile()) {
+  zoomImg = document.createElement("img");
+  zoomImg.className = "zoom-preview";
+  document.body.appendChild(zoomImg);
 
-  function showZoomPreview(event, src) {
-    if (!zoomImage) return;
-    zoomImage.classList.remove("show");
+  zoomVideo = document.createElement("video");
+  zoomVideo.className = "zoom-preview";
+  zoomVideo.muted = true;
+  zoomVideo.playsInline = true;
+  zoomVideo.loop = true;
+  zoomVideo.autoplay = true;
+  zoomVideo.style.display = "none";
+  document.body.appendChild(zoomVideo);
+}
+
+function showZoomPreview(event, src) {
+  if (!zoomImg || !zoomVideo) return;
+
+  const isVideo = src.endsWith('.mp4');
+
+  // Скрываем оба перед показом
+  zoomImg.classList.remove("show");
+  zoomVideo.classList.remove("show");
+  zoomImg.style.display = "none";
+  zoomVideo.style.display = "none";
+
+if (isVideo) {
+  zoomVideo.src = src;
+
+  zoomVideo.onloadedmetadata = () => {
+    const maxWidth = 440;
+    const maxHeight = 440;
+    const ratio = zoomVideo.videoWidth / zoomVideo.videoHeight;
+
+    if (ratio >= 1) {
+      zoomVideo.style.width = `${maxWidth}px`;
+      zoomVideo.style.height = `${maxWidth / ratio}px`;
+    } else {
+      zoomVideo.style.height = `${maxHeight}px`;
+      zoomVideo.style.width = `${maxHeight * ratio}px`;
+    }
+
+    zoomVideo.style.display = "block";
+    moveZoomPreview(event, zoomVideo);
+    zoomVideo.classList.add("show");
+  };
+}
+ else {
     const tempImg = new Image();
     tempImg.onload = function () {
       const maxWidth = 440;
@@ -374,36 +507,39 @@ setTimeout(() => {
       const ratio = tempImg.naturalWidth / tempImg.naturalHeight;
 
       if (ratio >= 1) {
-        zoomImage.style.width = `${maxWidth}px`;
-        zoomImage.style.height = `${maxWidth / ratio}px`;
+        zoomImg.style.width = `${maxWidth}px`;
+        zoomImg.style.height = `${maxWidth / ratio}px`;
       } else {
-        zoomImage.style.height = `${maxHeight}px`;
-        zoomImage.style.width = `${maxHeight * ratio}px`;
+        zoomImg.style.height = `${maxHeight}px`;
+        zoomImg.style.width = `${maxHeight * ratio}px`;
       }
 
-      zoomImage.src = src;
-      moveZoomPreview(event);
-      zoomImage.classList.add("show");
+      zoomImg.src = src;
+      zoomImg.style.display = "block";
+      moveZoomPreview(event, zoomImg);
+      zoomImg.classList.add("show");
     };
     tempImg.src = src;
   }
+}
 
-  function moveZoomPreview(event) {
-    if (!zoomImage) return;
-    let x = event.clientX + 90;
-    let y = event.clientY - 120;
-    const maxX = window.innerWidth - zoomImage.clientWidth - 10;
-    const maxY = window.innerHeight - zoomImage.clientHeight - 20;
-    if (x > maxX) x = maxX;
-    if (y > maxY) y = maxY;
-    zoomImage.style.left = `${x}px`;
-    zoomImage.style.top = `${y}px`;
-  }
+function moveZoomPreview(event, elem = zoomImg) {
+  if (!elem) return;
+  let x = event.clientX + 90;
+  let y = event.clientY - 120;
+  const maxX = window.innerWidth - elem.clientWidth - 10;
+  const maxY = window.innerHeight - elem.clientHeight - 20;
+  if (x > maxX) x = maxX;
+  if (y > maxY) y = maxY;
+  elem.style.left = `${x}px`;
+  elem.style.top = `${y}px`;
+}
 
-  function hideZoomPreview() {
-    if (!zoomImage) return;
-    zoomImage.classList.remove("show");
-  }
+function hideZoomPreview() {
+  if (zoomImg) zoomImg.classList.remove("show");
+  if (zoomVideo) zoomVideo.classList.remove("show");
+}
+
   
   let wasMobile = isMobile();
 
