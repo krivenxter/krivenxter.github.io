@@ -132,7 +132,7 @@ a.logo-link {
     display: flex;
     transform: translateX(-50%) !important;
   top: 6px;
-  zoom: 0.82;
+  zoom: 0.83;
 }
 
 .sidebar-dog.loaded {
