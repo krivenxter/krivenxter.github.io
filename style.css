@@ -46,6 +46,43 @@ html, body {
     color: #353535;
   }
 
+video.manual,
+video.manual-vert {
+    background: black;
+  box-shadow: none;
+}
+
+#playButton {
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 50%;
+    border: none;
+    font-size: 32px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 100px !important;
+    backdrop-filter: blur(6px);
+}
+
+button#playButton svg {
+    width: 48px;
+    height: 48px;
+}
+
+.intro-video {
+  object-fit: cover;
+  border-radius: 12px; /* если нужно скругление */
+  /* вообще всё что нужно — сюда */
+}
+
+.case-images-poster img {
+    width: 100%;
+    border-radius: 16px;
+}
 
 .custom-video {
   width: 100%;
@@ -91,7 +128,7 @@ a.logo-link {
       left: 56%;
     display: flex;
     transform: translateX(-50%) !important;
-  top: -20px;
+  top: -35px;
 }
 
 .sidebar-dog-loader.hidden {
@@ -131,8 +168,8 @@ a.logo-link {
     left: -17%;
     display: flex;
     transform: translateX(-50%) !important;
-  top: 6px;
-  zoom: 0.83;
+  top: 7px;
+  zoom: 0.84;
 }
 
 .sidebar-dog.loaded {
@@ -243,7 +280,7 @@ a:hover {
 video {
     width: 100%;
     height: auto;
-    border-radius: 12px;
+    border-radius: 16px;
     display: block;
     will-change: transform;
     transform: translateZ(0);
@@ -256,7 +293,7 @@ video {
 video.lazy-video {
     width: 100%;
     height: auto;
-    border-radius: 12px;
+    border-radius: 16px;
     display: block;
     will-change: transform;
     transform: translateZ(0);
@@ -939,7 +976,6 @@ aspect-ratio: auto !important;
 .case-images img {
     width: 100%;
     border-radius: 16px;
-    box-shadow: #00000047 0px 5px 10px;
 }
 
 .top-text-text1 span {

@@ -61,36 +61,39 @@ document.addEventListener('mouseleave', () => {
 // === ПИКСЕЛЬНЫЙ МИКСЕР + ЗУМ + КУБИК ===
 document.addEventListener("DOMContentLoaded", function () {
 const imageUrls = [
- "https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/video/Vizitki_anim2.mp4", "https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/video/812_vfx_final.mp4", "https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/video/poster-sod-spb.mp4",
-            "https://static.tildacdn.com/tild3365-6364-4364-b339-343536333162/ezgif-4-01cd93db62.gif",
+"https://rawcdn.githack.com/krivenxter/krivenxter.github.io/main/video/8marta-2025.mp4",
+"https://rawcdn.githack.com/krivenxter/krivenxter.github.io/main/video/cd-sa-anim.mp4",  
+"https://rawcdn.githack.com/krivenxter/krivenxter.github.io/main/video/ct-nav.mp4",  
+"https://rawcdn.githack.com/krivenxter/krivenxter.github.io/main/video/3108_Letters.mp4", 
+"https://rawcdn.githack.com/krivenxter/krivenxter.github.io/main/video/calltouch-neuro1.mp4",
+"https://rawcdn.githack.com/krivenxter/krivenxter.github.io/main/video/Digest_17.mp4",
+"https://rawcdn.githack.com/krivenxter/krivenxter.github.io/main/video/Digest_mazda.mp4",
+"https://rawcdn.githack.com/krivenxter/krivenxter.github.io/main/video/email-rocket.mp4",
+"https://rawcdn.githack.com/krivenxter/krivenxter.github.io/main/video/octopus.mp4",
+"https://rawcdn.githack.com/krivenxter/krivenxter.github.io/main/video/Welcome.mp4",   
+"https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/video/Vizitki_anim2.mp4", "https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/video/812_vfx_final.mp4", "https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/video/poster-sod-spb.mp4",
+"https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/video/vfx-2-spb.mp4",
+"https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/video/Zhaba drop_1.mp4", 
+"https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/img/Poster-Fuss1.jpg",   "https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/img/pepper.jpg", 
+"https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/img/JuicyAutopsy_Comp_2.jpg",   
             "https://static.tildacdn.com/tild6530-3839-4238-b436-656136623839/Quiz22_Bad_v2.jpg",
-            "https://static.tildacdn.com/tild6536-6232-4138-b039-623263393739/email-rocket.gif",
             "https://static.tildacdn.com/tild3864-3063-4363-b563-343232366434/ARS_1039.jpg",
             "https://static.tildacdn.com/tild6533-6532-4664-a365-346538346165/Calltouch_Key_Partne.png",
             "https://static.tildacdn.com/tild6531-6531-4363-a164-383164393664/SHUBER1.png",
             "https://static.tildacdn.com/tild6237-3265-4832-b464-383833313431/CT_BucketHat_5.jpg",
             "https://static.tildacdn.com/tild3835-3230-4732-b764-613037626139/CTLeads1_Turk_Gal_10.png",
-            "https://static.tildacdn.com/tild3738-3639-4531-b930-623533643731/ddf9755ed816b6ea493d.gif",
-            "https://static.tildacdn.com/tild3035-3033-4061-a132-643765653461/ct-navigation.gif",
             "https://static.tildacdn.com/tild3036-3034-4066-b838-346434616338/photo_2024-04-26_09-.jpg",
-            "https://static.tildacdn.com/tild3130-3839-4330-b736-353562303336/zhaba-3d.gif",
             "https://static.tildacdn.com/tild3136-3263-4539-b133-333836626461/GDB_1.jpg",
             "https://static.tildacdn.com/tild3162-3838-4761-b332-663634656261/test-money-guy.png",
             "https://static.tildacdn.com/tild3164-6438-4432-a362-386265393832/notebook2024_1b.png",
             "https://static.tildacdn.com/tild3337-6264-4531-b033-376262343438/g8-gloves.png",
             "https://static.tildacdn.com/tild3366-6136-4262-b734-323731313232/sch_ny_tree.png",
             "https://static.tildacdn.com/tild3437-6533-4635-b036-616630656434/krugly_stol.png",
-            "https://static.tildacdn.com/tild3464-3533-4731-b361-376139373239/octopus_anim.gif",
             "https://static.tildacdn.com/tild3536-3935-4335-a337-353431616661/g8-raketka.png",
-            "https://static.tildacdn.com/tild3538-3635-4032-b238-653038386434/spb-vfx2.gif",
-            "https://static.tildacdn.com/tild3732-6261-4863-a435-346438333131/Welcome.gif",
             "https://static.tildacdn.com/tild3737-6563-4963-b633-656632636431/otrkitka.jpg",
             "https://static.tildacdn.com/tild3830-3739-4661-b331-323834306335/merch2021.png",
             "https://static.tildacdn.com/tild3938-3632-4336-b962-346138396437/Libre_final.png",
-            "https://static.tildacdn.com/tild3939-6538-4130-b563-633035613634/Callday-SA22-animati.gif",
             "https://static.tildacdn.com/tild3962-6236-4465-b733-623164396433/Stand24-Masha-editio.jpg",
-            "https://static.tildacdn.com/tild3965-3537-4363-a131-316238323766/3108_Letters.gif",
-            "https://static.tildacdn.com/tild6133-6161-4838-a437-393163316432/Digest_1703.gif",
             "https://static.tildacdn.com/tild6135-3638-4131-a563-313537663335/play-practice.png",
             "https://static.tildacdn.com/tild6234-3731-4131-a433-396136643465/CVD3_Poster1_Tech_FI.jpg",
             "https://static.tildacdn.com/tild6264-3864-4564-b639-643466633864/ct-seashell.png",
@@ -104,7 +107,6 @@ const imageUrls = [
             "https://static.tildacdn.com/tild6134-6333-4664-a366-343365616537/CT22_Black_Tshirt_3.png",
             "https://static.tildacdn.com/tild6137-3963-4563-b531-323530666236/Chem_pomoch.png",
             "https://static.tildacdn.com/tild6138-6533-4535-a233-336666326331/bolshaya-kurtka.png",
-            "https://static.tildacdn.com/tild6663-6331-4165-b761-623638386163/8marta2025.gif",
             "https://static.tildacdn.com/tild6437-3236-4762-a634-313735613862/robot-people-muppets.png",
             "https://static.tildacdn.com/tild3132-3931-4234-a537-653266303733/API.png"
 ];
@@ -898,11 +900,16 @@ document.addEventListener("DOMContentLoaded", updateShuffleBtnPosition);
 document.querySelectorAll('video').forEach(video => {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        video.play().catch(() => {});
-      } else {
-        video.pause();
-      }
+if (entry.isIntersecting) {
+  if (!video.paused && !video.dataset.userPaused) {
+    video.play().catch(() => {});
+  }
+} else {
+  if (!video.paused) {
+    video.pause();
+  }
+}
+
     });
   }, { threshold: 0.1 });
 
@@ -958,6 +965,55 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('video').forEach(video => {
+    if (video.classList.contains('manual', 'manual-vert')) return;
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer.observe(video);
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.case-images').forEach(wrapper => {
+    const video = wrapper.querySelector('video');
+    const playButton = wrapper.querySelector('button');
+
+    if (video && playButton) {
+      function startVideo() {
+        video.setAttribute('controls', '');
+        video.play();
+        playButton.style.display = 'none';
+      }
+
+      playButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        startVideo();
+      });
+
+      video.addEventListener('click', () => {
+        if (video.paused) {
+          startVideo();
+        } else {
+          video.pause();
+        }
+      });
+    }
+  });
+});
+
+
 
 
 
