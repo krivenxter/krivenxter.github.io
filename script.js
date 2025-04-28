@@ -290,23 +290,26 @@ function shuffleImages() {
 
       if (randomMedia.endsWith('.mp4')) {
         // Если видео
-        const video = document.createElement('video');
-        video.src = randomMedia;
-        video.autoplay = true;
-        video.loop = true;
-        video.muted = true;
-        video.playsInline = true;
-        video.className = 'mobile-video';
-        mobileImgWrapper.appendChild(video);
+const video = document.createElement('video');
+video.src = randomMedia;
+video.autoplay = true;
+video.loop = true;
+video.muted = true;
+video.playsInline = true;
+video.className = 'mobile-video';
+video.style.opacity = '0'; // СТАРТОВО прячем
 
-        // Добавляем кнопку закрытия снова
-        mobileImgWrapper.appendChild(closeBtn);
+mobileImgWrapper.appendChild(video);
+mobileImgWrapper.appendChild(closeBtn);
 
-        void video.offsetWidth;
-
-        mobileImgWrapper.classList.remove("hide");
-        mobileImgWrapper.classList.add("show");
-        video.classList.add("show");
+// Когда видео прогрузило МЕТАДАННЫЕ — оно знает размеры
+video.addEventListener('loadeddata', () => {
+  // Теперь только ебашим анимацию появления
+  video.style.opacity = '1';
+  mobileImgWrapper.classList.remove("hide");
+  mobileImgWrapper.classList.add("show");
+  video.classList.add("show");
+});
 
       } else {
         // Если обычная картинка
@@ -337,13 +340,17 @@ function shuffleImages() {
       closeBtn.classList.remove("hide");
       closeBtn.classList.add("show");
 
+
+      
     }, 100);
+    
   } else {
     canvases.forEach((canvas, i) => {
       loadMediaWithPixelEffect(canvas, randomImages[i]);
     });
   }
 }
+
 
 
 
@@ -417,6 +424,11 @@ closeBtn.classList.add("hide");
 
 setTimeout(() => {
   mobileImg.removeAttribute("src");
+  
+
+    // 💥 ДОБАВЬ ЭТО
+    mobileImgWrapper.querySelectorAll('video').forEach(video => video.remove());
+
 }, 400);
 
 });
@@ -966,53 +978,55 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('video').forEach(video => {
-    if (video.classList.contains('manual', 'manual-vert')) return;
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      });
-    }, { threshold: 0.1 });
-
-    observer.observe(video);
-  });
-});
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.case-images').forEach(wrapper => {
     const video = wrapper.querySelector('video');
-    const playButton = wrapper.querySelector('button');
+    const playButton = wrapper.querySelector('.custom-play-button');
 
-    if (video && playButton) {
-      function startVideo() {
-        video.setAttribute('controls', '');
-        video.play();
+    if (video && playButton) { // <- проверяем что оба элемента есть
+      video.removeAttribute('controls');
+
+      playButton.addEventListener('click', () => {
+        video.setAttribute('controls', true);
         playButton.style.display = 'none';
-      }
-
-      playButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        startVideo();
-      });
-
-      video.addEventListener('click', () => {
-        if (video.paused) {
-          startVideo();
-        } else {
-          video.pause();
-        }
+        video.play();
       });
     }
   });
 });
 
+
+document.addEventListener('DOMContentLoaded', function () {
+  
+    const videos = document.querySelectorAll('video.looped');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target;
+
+            if (entry.isIntersecting) {
+                // Если видео видно, пытаемся запустить
+                if (video.paused) {
+                    video.play().catch(err => {
+                        console.error('Ошибка запуска видео:', err);
+                    });
+                }
+            } else {
+                // Когда видео уходит с экрана — ставим на паузу (опционально)
+                // Если хочешь, чтобы оно реально всегда в фоне играло — этот кусок убирай
+                // video.pause();
+            }
+        });
+    }, {
+        threshold: 0.25 // хотя бы 25% видно — уже считаем видимым
+    });
+
+    videos.forEach(video => {
+        observer.observe(video);
+    });
+});
 
 
 

@@ -46,6 +46,47 @@ html, body {
     color: #353535;
   }
 
+.video-container {
+  position: relative;
+  width: 100%;
+  background: black;
+  border-radius: 16px;
+}
+
+.video-container video {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.custom-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.custom-play-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 20px solid white;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+
+
+
+
 video.manual,
 video.manual-vert {
     background: black;
@@ -1145,7 +1186,12 @@ aspect-ratio: auto !important;
     opacity: 0;
   }
 
-
+.video-container video {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  
   .hover-wrapper {
     cursor: pointer;
   }
@@ -1165,8 +1211,12 @@ aspect-ratio: auto !important;
   transform: translateY(0) translateX(-50%);
 }
 
-
-
+  .video-container {
+  position: relative;
+  width: 100%;
+  background: black;
+  border-radius: 10px;
+  }
   
   .sidebar-dog {
     width: 20%;
