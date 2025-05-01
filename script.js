@@ -1029,6 +1029,50 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+ document.addEventListener("DOMContentLoaded", () => {
+  const letterElements = document.querySelectorAll(".letter");
 
+  const svgVariants = {
+    O: ['https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/img/O.svg'],
+    L: ['https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/img/L.svg'],
+    E: ['https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/img/E.svg'],
+    G: ['https://cdn.jsdelivr.net/gh/krivenxter/krivenxter.github.io/img/G.svg']
+  };
+
+  const getRandomLetterKey = () => ['O', 'L', 'E', 'G'][Math.floor(Math.random() * 4)];
+  const getRandomVariant = (letter) => svgVariants[letter][Math.floor(Math.random() * svgVariants[letter].length)];
+
+function replaceRandomLetter() {
+  const el = letterElements[Math.floor(Math.random() * letterElements.length)];
+  const newLetter = getRandomLetterKey();
+  const newSrc = getRandomVariant(newLetter);
+
+  // Генерируем случайные параметры
+  el.style.setProperty('--dx', Math.random() > 0.5 ? 1 : -1);
+  el.style.setProperty('--dy', Math.random() > 0.5 ? 1 : -1);
+  el.style.setProperty('--hue', `${Math.floor(Math.random() * 360)}deg`);
+
+  el.classList.add("animating");
+
+  setTimeout(() => {
+    el.dataset.letter = newLetter;
+    el.innerHTML = `<img src="${newSrc}" width="100%" height="100%" />`;
+    el.classList.remove("animating");
+  }, 200);
+
+    setTimeout(() => {
+      el.classList.remove("animating");
+    }, 600);
+  }
+
+  // Первичная отрисовка
+  letterElements.forEach((el) => {
+    const letter = el.dataset.letter;
+    const src = getRandomVariant(letter);
+    el.innerHTML = `<img src="${src}" width="100%" height="100%" />`;
+  });
+
+  setInterval(replaceRandomLetter, 1000);
+});
 
 

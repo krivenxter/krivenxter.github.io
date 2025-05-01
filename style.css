@@ -38,6 +38,35 @@ html, body {
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
 }
 
+.oleg-mix-container {
+  display: flex;
+  user-select: none;
+  overflow: hidden;
+}
+
+.letter {
+  width: 100%;
+  transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
+  will-change: transform, filter, opacity;
+    overflow: hidden;
+}
+
+.letter.animating {
+  transform: scale(0.7) rotate(15deg);
+  filter: blur(6px);
+  opacity: 0.1;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
 .wrapper {
   width: 100%;
 }
@@ -1213,6 +1242,10 @@ aspect-ratio: auto !important;
     opacity: 0;
   }
 
+  .oleg-mix-container {
+    margin-bottom: 25px;
+}
+  
 .video-container video {
     width: 100%;
     border-radius: 10px;
