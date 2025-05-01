@@ -853,7 +853,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const topText2 = document.querySelectorAll(".top-text-text2");
+  const topText2 = document.querySelectorAll(".top-text-text2, .top-text-text3");
 
   gsap.to(topText2, {
     opacity: 1,
