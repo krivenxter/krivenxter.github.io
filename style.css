@@ -328,11 +328,12 @@ button.close-contact-form:hover {
 }
 
 a {
-    text-decoration: underline;
+    text-decoration: none !important;
     color: black;
 }
 
 a:hover {
+  text-decoration: underline !important;
     color: #353535;
 }
 
@@ -1043,7 +1044,7 @@ aspect-ratio: auto !important;
 .case-title.hovered,
 .case-title.hovered a, .case-title:hover {
   color: #353535 !important;
-  transform: scale(1.02) translateX(2px);
+  transform: scale(1.015) translateX(3px);
 }
 
 
