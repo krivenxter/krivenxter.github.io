@@ -4,6 +4,9 @@
   font-family: "Manrope", sans-serif !important;
 }
 
+img#Omnic {
+    box-shadow: none;
+}
 
 body, button, input, .contact-form textarea {
   font-family: "Manrope", sans-serif !important;
@@ -68,7 +71,7 @@ html, body {
 
 .wrapper {
   width: 100%;
-  overflow: clip;
+      overflow: clip;
 }
 
 
