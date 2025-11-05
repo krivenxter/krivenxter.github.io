@@ -40,6 +40,11 @@ html, body {
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
 }
 
+
+a {
+  text-decoration: none;
+}
+
 .oleg-mix-container {
   display: flex;
   user-select: none;
@@ -280,8 +285,14 @@ a#logo {
   opacity: 0;
 }
 
-a.custom-link {
+.custom-link {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  text-decoration: none;
+  color: #000; /* Исходный цвет текста */
 }
 
 .case-bottom {
@@ -330,15 +341,7 @@ button.close-contact-form:hover {
     color: white !important;
 }
 
-a {
-    text-decoration: none !important;
-    color: black;
-}
 
-a:hover {
-  text-decoration: underline !important;
-    color: #353535;
-}
 
 .sidebar-menu li a {
     display: none !important;
@@ -369,7 +372,6 @@ video {
     aspect-ratio: 16 / 9;
     contain: layout style;
     opacity: 0.99;
-    box-shadow: #0000002b 0px 5px 10px;
 }
 
 video.lazy-video {
@@ -484,6 +486,12 @@ video.lazy-video {
 
 .top-text-text2 a {
   color: inherit !important;
+  text-decoration: underline !important;
+}
+
+
+.top-text-text2 a:hover {
+  color: gray !important;
   text-decoration: underline !important;
 }
 
@@ -1030,6 +1038,7 @@ aspect-ratio: auto !important;
     color: #000;
     display: flex;
     gap: 20px;
+  transition: transform 0.15s ease, color 0.15s ease;
 }
 
 .case-title-under {
@@ -1037,15 +1046,9 @@ aspect-ratio: auto !important;
     gap: 10px;
 }
 
-.case-title,
-.case-title a {
-  transition: transform 0.15s ease, color 0.15s ease;
-}
 
-.case-title.hovered,
-.case-title.hovered a, .case-title:hover {
-  color: #353535 !important;
-  transform: scale(1.015) translateX(3px);
+.custom-link:hover .case-title {
+  color: #0000007d !important;
 }
 
 
@@ -1065,17 +1068,90 @@ aspect-ratio: auto !important;
 
 
 .case-images {
+  border-radius: 16px;
+  position: relative; 
+  overflow: hidden; 
+  width: 100%;
+  /* --- ДОБАВЛЕНО --- */
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  overflow: visible;
-  
+  flex-direction: column;
+  gap: 15px; 
 }
 
+/* И СДЕЛАЙТЕ ТАК: */
 .case-images img {
-    width: 100%;
+  width: 100%;
     border-radius: 16px;
-        box-shadow: #00000012 0px 5px 10px;
+  height: auto; /* <-- ИЗМЕНЕНО */
+  object-fit: cover; 
+
+}
+
+.img-original {
+  opacity: 1;
+  /* Плавное исчезновение */
+}
+
+.img-hover {
+  opacity: 0; /* Изначально полностью прозрачна */
+  transform: scale(1); 
+  transition: transform 6s ease-out;
+}
+
+/* --- ЭФФЕКТЫ ХОВЕРА (ДОБАВИТЬ ЭТО) --- */
+
+/* 1. Показываем ховер-картинку и запускаем зум */
+.custom-link:hover .img-hover {
+  opacity: 1; /* Делаем видимой */
+  transform: scale(1.1); /* Зум (например, на 10%) */
+}
+
+/* 2. Прячем оригинальную картинку */
+.custom-link:hover .img-original {
+  opacity: 0; /* Делаем невидимой */
+}
+
+/* Общие стили для наложения ТОЛЬКО ДЛЯ ХОВЕР-БЛОКА */
+.custom-link .case-images .img-original,
+.custom-link .case-images .img-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* --- Возвращаем поведение наложения ТОЛЬКО для ховер-блоков --- */
+
+/* 1. Возвращаем контейнеру aspect-ratio */
+.custom-link .case-images {
+  display: block; /* Отменяем flex */
+  aspect-ratio: 16 / 9;
+  gap: 0;
+}
+
+/* 2. Растягиваем картинки внутри него на 100% */
+.custom-link .case-images img {
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px; /* <-- ДОБАВЬТЕ ЭТУ СТРОКУ */
+}
+
+.img-original {
+  opacity: 1;
+}
+
+.img-hover {
+  opacity: 0; 
+  transform: scale(1); 
+}
+
+
+/* И ЗАМЕНИТЕ НА ЭТО (ДОБАВИЛИ .transitions-ready): */
+.tab-content.content-active.transitions-ready .img-original {
+  transition: opacity 0.3s ease;
+}
+.tab-content.content-active.transitions-ready .img-hover {
+  transition: opacity 0.3s ease,
+              transform 6s ease-out;
 }
 
 .top-text-text1 span {
