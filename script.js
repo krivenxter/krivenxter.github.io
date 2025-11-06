@@ -637,25 +637,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".tab");
   const contents = document.querySelectorAll(".tab-content");
 
-  function showContent(type) {
-    contents.forEach(el => {
-      el.classList.remove("content-active");
-    });
+  
+function showContent(type) {
+  // 1. Сбрасываем 'transitions-ready' у всех при смене таба
+  contents.forEach(el => {
+      el.classList.remove("content-active");
+      el.classList.remove("transitions-ready"); // <-- ДОБАВЛЕНО
+  });
 
-    const toShow = type === "all"
-      ? contents
-      : document.querySelectorAll(`.content-${type}`);
+  const toShow = type === "all"
+      ? contents
+      : document.querySelectorAll(`.content-${type}`);
 
-    toShow.forEach(el => {
-      el.classList.add("content-active");
-    });
+  toShow.forEach(el => {
+      el.classList.add("content-active");
+  });
 
-    gsap.fromTo(toShow, 
-      { opacity: 0, y: 30 }, 
-      { opacity: 1, y: 0, duration: 0.8, ease: "none", stagger: 0.1 }
-    );
-  }
+  gsap.fromTo(toShow, 
+      { opacity: 0, y: 30 }, 
+      { opacity: 1, y: 0, duration: 0.8, ease: "none", stagger: 0.1 }
+  );
 
+  // 2. ДОБАВЛЕНО: Включаем CSS-переходы через 1 секунду (когда GSAP точно закончил)
+  setTimeout(() => {
+    toShow.forEach(el => el.classList.add('transitions-ready'));
+  }, 1000); // 1000ms = 1 секунда
+}
+
+  
   // === навешиваем клики на табы
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
@@ -683,7 +692,8 @@ document.addEventListener("DOMContentLoaded", () => {
       entry.target.classList.contains("content-active") &&
       !entry.target.classList.contains("was-animated")
     ) {
-      const items = entry.target.querySelectorAll(".case-header, .case-images img");
+// ЗАМЕНИТЕ НА ЭТУ СТРОКУ:
+const items = entry.target.querySelectorAll(".case-header, .case-images img:not(.img-original):not(.img-hover)");
 
       gsap.fromTo(items,
         { opacity: 0, y: 30 },
@@ -939,25 +949,6 @@ if (entry.isIntersecting) {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const videos = document.querySelectorAll('.case-images video');
-
-  videos.forEach(video => {
-    const caseBlock = video.closest('.tab-content');
-    const videoWrapper = video.closest('.case-images');
-    const title = videoWrapper?.previousElementSibling?.querySelector('.case-title');
-
-    if (title) {
-      video.addEventListener('mouseenter', () => {
-        title.classList.add('hovered');
-      });
-
-      video.addEventListener('mouseleave', () => {
-        title.classList.remove('hovered');
-      });
-    }
-  });
-});
 
 
 document.addEventListener("DOMContentLoaded", () => {
